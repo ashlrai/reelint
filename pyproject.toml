@@ -5,7 +5,7 @@ description = "A linter for short-form video: catch the edits that make viewers 
 readme = "README.md"
 license = { text = "MIT" }
 requires-python = ">=3.10"
-dependencies = ["numpy>=1.24"]
+dependencies = ["numpy>=1.24", "tomli>=2.0; python_version < '3.11'"]
 keywords = ["reels", "shorts", "tiktok", "video", "linter", "retention", "ffmpeg", "creator-tools"]
 classifiers = [
     "Development Status :: 3 - Alpha",

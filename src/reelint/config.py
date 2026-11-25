@@ -9,8 +9,11 @@ from typing import Optional
 
 if sys.version_info >= (3, 11):
     import tomllib
-else:  # pragma: no cover
-    tomllib = None
+else:  # pragma: no cover - the tomli backport covers 3.10
+    try:
+        import tomli as tomllib
+    except ModuleNotFoundError:
+        tomllib = None
 
 
 @dataclass(frozen=True)
@@ -82,7 +85,7 @@ def load_config(profile: str = "reels", path: Optional[str | Path] = None,
 
 def _apply_toml(config: Config, path: Path) -> Config:
     if tomllib is None:
-        raise ValueError("Reading reelint.toml needs Python 3.11 or later")
+        raise ValueError("Reading reelint.toml needs tomllib (Python 3.11+) or the tomli package")
     data = tomllib.loads(path.read_text(encoding="utf-8"))
     known = {f.name: f for f in fields(Config)}
     overrides: dict = {}
