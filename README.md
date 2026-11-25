@@ -1,4 +1,16 @@
-# reelint
+```
+▐▌░░▐▌░░▐▌░░▐▌░░▐▌░░▐▌░░▐▌░░▐▌░░▐▌░░▐▌░░▐▌░░▐▌░░▐▌░░▐▌
+
+██████╗ ███████╗███████╗██╗     ██╗███╗   ██╗████████╗
+██╔══██╗██╔════╝██╔════╝██║     ██║████╗  ██║╚══██╔══╝
+██████╔╝█████╗  █████╗  ██║     ██║██╔██╗ ██║   ██║
+██╔══██╗██╔══╝  ██╔══╝  ██║     ██║██║╚██╗██║   ██║
+██║  ██║███████╗███████╗███████╗██║██║ ╚████║   ██║
+╚═╝  ╚═╝╚══════╝╚══════╝╚══════╝╚═╝╚═╝  ╚═══╝   ╚═╝
+
+▐▌░░▐▌░░▐▌░░▐▌░░▐▌░░▐▌░░▐▌░░▐▌░░▐▌░░▐▌░░▐▌░░▐▌░░▐▌░░▐▌
+  a linter for short-form video · 13 rules · runs locally
+```
 
 [![CI](https://github.com/ashlrai/reelint/actions/workflows/ci.yml/badge.svg)](https://github.com/ashlrai/reelint/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)

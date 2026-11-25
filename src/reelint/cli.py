@@ -6,7 +6,7 @@ import argparse
 import json
 import sys
 
-from . import __version__
+from . import __version__, banner
 from .analysis import analyze
 from .config import PROFILES, load_config
 from .media import MediaError
@@ -18,8 +18,8 @@ EXIT_OK, EXIT_FINDINGS, EXIT_FAILURE = 0, 1, 2
 
 def _parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(prog="reelint", description="A linter for short-form video.")
-    parser.add_argument("--version", action="version", version=f"reelint {__version__}")
-    sub = parser.add_subparsers(dest="command", required=True)
+    parser.add_argument("--version", action="store_true", help="Show the version and exit")
+    sub = parser.add_subparsers(dest="command")
 
     check = sub.add_parser("check", help="Lint one or more videos")
     check.add_argument("files", nargs="+", help="Video files to check")
@@ -122,11 +122,26 @@ def _check(args: argparse.Namespace) -> int:
     return status
 
 
+def _show_wordmark() -> None:
+    """Print the wordmark, but only when a person is watching: piped output stays plain."""
+    if getattr(sys.stdout, "isatty", lambda: False)():
+        print(banner.render(Style.for_stream(sys.stdout)), end="\n\n")
+
+
 def main(argv: list[str] | None = None) -> int:
     for stream in (sys.stdout, sys.stderr):
         if hasattr(stream, "reconfigure"):
             stream.reconfigure(encoding="utf-8", errors="replace")
-    args = _parser().parse_args(argv)
+    parser = _parser()
+    args = parser.parse_args(argv)
+    if args.version:
+        _show_wordmark()
+        print(f"reelint {__version__}")
+        return EXIT_OK
+    if args.command is None:
+        _show_wordmark()
+        parser.print_help()
+        return EXIT_OK
     if args.command == "rules":
         return _list_rules()
     if args.command == "hook":
